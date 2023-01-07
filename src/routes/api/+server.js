@@ -2,7 +2,6 @@ import { json } from '@sveltejs/kit';
 import { readFileSync, writeFileSync } from 'fs';
 import { nanoid } from 'nanoid';
 import path from 'path';
-import { text } from 'svelte/internal';
 
 export async function GET() {
   const file = path.join(process.cwd(), 'english.json');
