@@ -1,7 +1,28 @@
-<div class="w-[28rem] bg-gwen-splash bg-bottom p-4 flex flex-between my-4 text-white">
-  <p>Your shortened url is: SHORTENED</p>
-  <div class="flex">
-    <p>Clicked 5 times</p>
-    <p>Copy</p>
+<script>
+  export let resultant = '';
+</script>
+
+{#if resultant}
+<div class="flex justify-between bg-periwinkle-blue-200 p-4 my-4 border-black border-2 rounded-2xl items-center">
+  <a href={resultant} class="underline hover:font-bold mr-4">{resultant}</a>
+  <button on:click={() => {
+    if ("ontouchstart" in document.documentElement) {
+      resultant.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(resultant);
+    } else {
+      resultant.select()
+      navigator.clipboard.writeText(resultant);
+    }
+  }} class="ml-4 bg-gwen-bright px-3 leading-4 h-8 font-bold rounded-3xl">Copy</button>
+</div>
+<div class="w-80 bg-periwinkle-blue-200 p-4 flex-col my-4 rounded-3xl">
+  <div class="flex justify-between w-full mb-4">
+    <p>Clicked</p>
+    <p>5 times</p>
+  </div>
+  <div class="flex justify-between w-full">
+    <p>Created at</p>
+    <p>Date</p>
   </div>
 </div>
+{/if}
