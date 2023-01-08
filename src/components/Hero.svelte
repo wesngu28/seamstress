@@ -1,4 +1,4 @@
-<div class="w-[28rem] mb-24 text-gwen-hero">
+<div class="w-[28rem] mb-24 text-neon-blue-300">
 	<div class="text-center">
 		<h2 class="flex items-center justify-center gap-2 text-4xl font-bold">
 			Seamstress

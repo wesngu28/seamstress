@@ -8,6 +8,8 @@ module.exports = {
         'gwen-bright': '#A9D2D8',
         'gwen-hero': '#91F2E9',
         'gwen-header': '#1A232D',
+        "neon-blue-300": "#8be6ff",
+        "periwinkle-blue-200": "#dcdcff",
       },
       backgroundImage: {
         'gwen-splash': "url('Gwen_OriginalSkin.jpg')",
@@ -17,6 +19,9 @@ module.exports = {
       },
       gridTemplateRows: {
         'fourth-half': '25% 50%'
+      },
+      gridTemplateColumns: {
+        'two-big-middle': '1fr 2fr 2fr 1fr;'
       }
     },
   },
