@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --text-primary: 139 230 255;
+    --bg-primary: 32 34 50;
+  }
+}

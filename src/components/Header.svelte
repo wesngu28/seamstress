@@ -12,7 +12,7 @@
 </script>
 
 <header
-	class="w-full h-24 flex justify-between p-4 mx-2 bg-gwen-header text-neon-blue-300 items-center flex-initial"
+	class="w-full h-24 flex justify-between p-4 bg-cafe-header dark:bg-gwen-header text-cafe-orange dark:text-neon-blue-300 items-center flex-initial shadow"
 >
 	<a href="/" class="flex items-center justify-center gap-2 text-4xl font-bold">
 		Seamstress
@@ -21,7 +21,7 @@
 	<div class="flex flex-between">
 		<a class={`mx-4 ${signedStatus ? 'opacity-100' : 'opacity-25'}`} href={`${signedStatus ? '/scissors' : '/'}`}>Your Links</a>
     {#if $signedStatus}
-		<button on:click={async () => await signout()}>wungus bungus</button>
+		<button on:click={async () => await signout()}>Log Out</button>
     {:else}
     <button on:click={async () => await signInWithGitHub()} type="button" class="mx-4 px-6"
 			><p>Sign In</p></button

@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { SITE } from '$env/static/public'
+	import { PUBLIC_SITE } from '$env/static/public'
 	let userUrls;
 	import { publicSuperbase } from '../../util/supabase';
 	onMount(async () => {
@@ -12,15 +12,14 @@
 			.eq('creator', session.session.user.id);
 
 		userUrls = userLinks.map((link) => link);
-		console.log(userUrls)
 	});
 </script>
 
 <div class="flex justify-center items-center place-items-center w-full flex-col flex-auto">
 	{#if userUrls}
-		<h2 class="font-bold text-3xl mb-4 text-neon-blue-300">Your Links</h2>
+		<h2 class="font-bold text-3xl mb-4 text-cafe-orange dark:text-neon-blue-300">Your Links</h2>
 		<table
-			class="table-fixed w-[48rem] text-center bg-periwinkle-blue-200 rounded-3xl border-separate border-spacing-2 border">
+			class="table-fixed w-[48rem] text-center bg-cafe-pink dark:bg-periwinkle-blue-200 rounded-3xl border-separate border-spacing-2 border">
 			<thead class="p-4">
 				<tr>
 					<th>Created</th>
@@ -41,7 +40,7 @@
 							>
 						</td>
 						<td>
-							<a href={`${SITE}/${userUrl.word}`}>{userUrl.word}</a>
+							<a href={`${PUBLIC_SITE}/${userUrl.word}`}>{userUrl.word}</a>
 						</td>
 						<td>
 							<p>{userUrl.clicks}</p>
