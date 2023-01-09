@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { SITE } from '$env/static/public'
 	let userUrls;
 	import { publicSuperbase } from '../../util/supabase';
 	onMount(async () => {
@@ -11,6 +12,7 @@
 			.eq('creator', session.session.user.id);
 
 		userUrls = userLinks.map((link) => link);
+		console.log(userUrls)
 	});
 </script>
 
@@ -39,7 +41,7 @@
 							>
 						</td>
 						<td>
-							<p>{userUrl.word}</p>
+							<a href={`${SITE}/${userUrl.word}`}>{userUrl.word}</a>
 						</td>
 						<td>
 							<p>{userUrl.clicks}</p>

@@ -15,14 +15,4 @@
     }
   }} class="ml-4 bg-gwen-bright px-3 leading-4 h-8 font-bold rounded-3xl">Copy</button>
 </div>
-<div class="w-80 bg-periwinkle-blue-200 p-4 flex-col my-4 rounded-3xl">
-  <div class="flex justify-between w-full mb-4">
-    <p>Clicked</p>
-    <p>5 times</p>
-  </div>
-  <div class="flex justify-between w-full">
-    <p>Created at</p>
-    <p>Date</p>
-  </div>
-</div>
 {/if}

@@ -14,10 +14,10 @@
 <header
 	class="w-full h-24 flex justify-between p-4 mx-2 bg-gwen-header text-neon-blue-300 items-center flex-initial"
 >
-	<h1 class="flex items-center justify-center gap-2 text-4xl font-bold">
+	<a href="/" class="flex items-center justify-center gap-2 text-4xl font-bold">
 		Seamstress
 		<img src="gwen.png" alt="gwen" loading="lazy" width="48" height="48" />
-	</h1>
+	</a>
 	<div class="flex flex-between">
 		<a class={`mx-4 ${signedStatus ? 'opacity-100' : 'opacity-25'}`} href={`${signedStatus ? '/scissors' : '/'}`}>Your Links</a>
     {#if $signedStatus}
