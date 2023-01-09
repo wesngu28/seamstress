@@ -1,17 +1,17 @@
 <script>
 	import { onMount } from 'svelte';
-	import { PUBLIC_SITE } from '$env/static/public'
+	import { PUBLIC_SITE } from '$env/static/public';
 	let userUrls;
 	import { publicSuperbase } from '../../util/supabase';
 	onMount(async () => {
 		const { data: session, error: sessionerror } = await publicSuperbase.auth.getSession();
-		console.log(session);
-		let { data: userLinks, error: saError } = await publicSuperbase
-			.from('Links')
-			.select()
-			.eq('creator', session.session.user.id);
-
-		userUrls = userLinks.map((link) => link);
+		if (session.session) {
+			let { data: userLinks, error: saError } = await publicSuperbase
+				.from('Links')
+				.select()
+				.eq('creator', session.session.user.id);
+			userUrls = userLinks.map((link) => link);
+		}
 	});
 </script>
 
@@ -19,10 +19,11 @@
 	{#if userUrls}
 		<h2 class="font-bold text-3xl mb-4 text-cafe-orange dark:text-neon-blue-300">Your Links</h2>
 		<table
-			class="table-fixed w-[48rem] text-center bg-cafe-pink dark:bg-periwinkle-blue-200 rounded-3xl border-separate border-spacing-2 border">
+			class="table-fixed w-[95vw] md:w-[36rem] lg:w-[48rem] text-center bg-cafe-pink dark:bg-periwinkle-blue-200 rounded-3xl border-separate border-spacing-2 border"
+		>
 			<thead class="p-4">
 				<tr>
-					<th>Created</th>
+					<th class="hidden tiny:table-cell">Created</th>
 					<th>Original</th>
 					<th>Snipped</th>
 					<th>Clicks</th>
@@ -31,7 +32,7 @@
 			<tbody class="truncate gap-4">
 				{#each userUrls as userUrl}
 					<tr class="truncate">
-						<td>
+						<td class="hidden tiny:table-cell">
 							<p>{userUrl.created_at.substring(0, 10)}</p>
 						</td>
 						<td class="w-min truncate">

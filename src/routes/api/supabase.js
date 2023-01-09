@@ -1,5 +1,5 @@
-import { SUPABASE_KEY } from '$env/static/private'
-import { createClient } from "@supabase/supabase-js";
+import { SUPABASE_KEY } from '$env/static/private';
+import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = 'https://qapykcdprhrersuvogia.supabase.co';
 

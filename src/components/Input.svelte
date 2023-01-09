@@ -1,7 +1,7 @@
 <script>
 	import { signedStatus } from '../stores/stores';
 	import { publicSuperbase } from '../util/supabase';
-	import { PUBLIC_SITE } from '$env/static/public'
+	import { PUBLIC_SITE } from '$env/static/public';
 	let url;
 	let resultant = '';
 	import Result from './Result.svelte';
@@ -20,22 +20,23 @@
 			const json = await req.json();
 			const randomWord = json.path;
 			resultant = `${PUBLIC_SITE}/${randomWord}`;
-      if($signedStatus === true) {
-        const { data: session, error: sessionerror } = await publicSuperbase.auth.getSession()
-				console.log(session)
-				await fetch('/api/insert', {
-					method: 'POST',
-					body: JSON.stringify({
-						original: url,
-						shortened: resultant,
-						word: randomWord,
-						creator: session.session.user.id
-					}),
-					headers: {
-						'Accept': 'application/json'
-					}
-				})
-      }
+			if ($signedStatus === true) {
+				const { data: session, error: sessionerror } = await publicSuperbase.auth.getSession();
+				if (session && session.session) {
+					await fetch('/api/insert', {
+						method: 'POST',
+						body: JSON.stringify({
+							original: url,
+							shortened: resultant,
+							word: randomWord,
+							creator: session.session.user.id
+						}),
+						headers: {
+							Accept: 'application/json'
+						}
+					});
+				}
+			}
 		}
 	}
 </script>
@@ -48,6 +49,7 @@
 		placeholder="Enter a link"
 	/>
 	<button
+		type="submit"
 		class="w-max px-6 h-12 text-black text-sm leading-4 font-bold rounded-3xl bg-cafe-bright dark:bg-gwen-bright"
 		on:click={add}>{resultant ? 'Snip Another' : 'Snip'}</button
 	>

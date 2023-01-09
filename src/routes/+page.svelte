@@ -1,7 +1,7 @@
 <script>
-	import Hero from "../components/Hero.svelte";
+	import CenterContent from '../components/CenterContent.svelte';
 </script>
 
-<div class="flex justify-center items-center w-full flex-col flex-auto font-maven">
-	<Hero />
+<div class="flex justify-center items-center w-full flex-col flex-auto">
+	<CenterContent />
 </div>
