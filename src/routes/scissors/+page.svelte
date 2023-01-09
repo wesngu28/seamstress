@@ -15,6 +15,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Your Links</title>
+</svelte:head>
+
 <div class="flex justify-center items-center place-items-center w-full flex-col flex-auto">
 	{#if userUrls}
 		<h2 class="font-bold text-3xl mb-4 text-cafe-orange dark:text-neon-blue-300">Your Links</h2>

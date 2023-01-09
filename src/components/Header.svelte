@@ -12,26 +12,21 @@
 			const width = document.body.clientWidth;
 			if (width >= 768) {
 				const dropdown = document.querySelector('.dropdown');
-				dropdown.classList.remove('block');
-				dropdown.classList.add('hidden');
+				dropdown.classList.toggle('hidden');
+  			dropdown.classList.toggle('block');
 			}
 		});
 	});
 
 	function dropDownStuff() {
 		const dropdown = document.querySelector('.dropdown');
-		if (dropdown.classList.contains('hidden')) {
-			dropdown.classList.remove('hidden');
-			dropdown.classList.add('block');
-		} else {
-			dropdown.classList.add('hidden');
-			dropdown.classList.remove('block');
-		}
+		dropdown.classList.toggle('hidden');
+  	dropdown.classList.toggle('block');
 	}
 </script>
 
 <header
-	class="w-full h-24 flex justify-between p-4 bg-cafe-header dark:bg-gwen-header text-cafe-orange dark:text-neon-blue-300 items-center flex-initial shadow"
+	class="w-full h-24 flex justify-between p-4 bg-cafe-header dark:bg-gwen-header text-cafe-orange dark:text-neon-blue-300 items-center flex-initial shadow relative"
 >
 	<div class="hidden md:flex ml-4 items-center gap-4 justify-center">
 		<a href="/" class="flex items-center justify-center gap-2 text-4xl font-bold">
@@ -48,12 +43,12 @@
 			<img src="Burger-large.png" alt="burger" />
 		</button>
 	</div>
-	<div class="hidden md:hidden dropdown">
-		<a href="/" class="flex items-center justify-center gap-2 text-4xl font-bold">
+	<div class="hidden md:hidden dropdown absolute top-20 bg-cafe-header dark:bg-gwen-header ml-0">
+		<a href="/" class="flex text-4xl font-bold">
 			Seamstress
 			<img src="gwen.png" alt="gwen" loading="lazy" width="48" height="48" />
 		</a>
-		<a class="mx-4" href="/about">About</a>
+		<a href="/about">About</a>
 	</div>
 	<div class="flex flex-between items-center gap-4 mr-4">
 		{#if $signedStatus}

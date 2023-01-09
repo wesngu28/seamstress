@@ -5,14 +5,15 @@
 		window.addEventListener('resize', () => {
 			const image = document.querySelector('.gwens');
 			const width = window.innerWidth;
-			if (width >= 640) {
-				image.src = 'Gwenner.jpg';
-			} else {
-				image.src = 'Gwenizontal.jpg';
-			}
+			if (width >= 640) image.src = 'Gwenner.jpg';
+			else image.src = 'Gwenizontal.jpg';
 		});
 	});
 </script>
+
+<svelte:head>
+	<title>About</title>
+</svelte:head>
 
 <div class="flex flex-auto justify-center items-center">
 	<div class="flex flex-col items-center lg:place-items-center w-full lg:grid lg:grid-cols-2">
