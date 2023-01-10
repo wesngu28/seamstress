@@ -16,7 +16,7 @@
 </svelte:head>
 
 <div class="flex flex-auto justify-center items-center">
-	<div class="flex flex-col items-center lg:place-items-center w-full lg:grid lg:grid-cols-2">
+	<div class="flex flex-col items-center lg:place-items-center big:w-3/4 lg:grid lg:grid-cols-2">
 		<div class="h-[480px] sm:h-auto w-auto">
 			<img class="gwens h-[480px] sm:h-auto sm:p-8" src="Gwenner.jpg" alt="Gwen" />
 		</div>

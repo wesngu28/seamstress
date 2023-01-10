@@ -10,13 +10,3 @@ publicSuperbase.auth.onAuthStateChange((event, session) => {
 	if (event == 'SIGNED_IN') signedStatus.set(true);
 	if (event == 'SIGNED_OUT') signedStatus.set(false);
 });
-
-export async function signInWithGitHub() {
-	const { data, error } = await supabase.auth.signInWithOAuth({
-		provider: 'github'
-	});
-}
-
-export async function signout() {
-	const { error } = await supabase.auth.signOut();
-}

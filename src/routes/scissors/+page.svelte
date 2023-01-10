@@ -3,6 +3,7 @@
 	import { PUBLIC_SITE } from '$env/static/public';
 	let userUrls;
 	import { publicSuperbase } from '../../util/supabase';
+	import { signedStatus } from '../../stores/stores';
 	onMount(async () => {
 		const { data: session, error: sessionerror } = await publicSuperbase.auth.getSession();
 		if (session.session) {
@@ -20,7 +21,7 @@
 </svelte:head>
 
 <div class="flex justify-center items-center place-items-center w-full flex-col flex-auto">
-	{#if userUrls}
+	{#if userUrls && $signedStatus}
 		<h2 class="font-bold text-3xl mb-4 text-cafe-orange dark:text-neon-blue-300">Your Links</h2>
 		<table
 			class="table-fixed w-[95vw] md:w-[36rem] lg:w-[48rem] text-center bg-cafe-pink dark:bg-periwinkle-blue-200 rounded-3xl border-separate border-spacing-2 border"

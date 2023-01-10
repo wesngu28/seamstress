@@ -21,8 +21,8 @@ module.exports = {
 				'cafe-pink': '#f9c5d2'
 			},
 			backgroundImage: {
-				'gwen-splash': "url('Gwen_OriginalSkin.jpg')",
-				'cafe-splash': "url('Cafe.jpg')"
+				'gwen-splash': "url('/Gwen_OriginalSkin.jpg')",
+				'cafe-splash': "url('/Cafe.jpg')"
 			},
 			backgroundPosition: {
 				centered: 'center'
@@ -34,7 +34,8 @@ module.exports = {
 				'two-big-middle': '1fr 2fr 2fr 1fr;'
 			},
 			screens: {
-				tiny: '430px'
+				tiny: '430px',
+				big: '1920px'
 			}
 		}
 	},
