@@ -13,7 +13,7 @@
 
 ## 🤔 Why
 
-Having recently graduated, I have begun to apply for many positions, and now that I have begun to track them, I've become acutely aware of how long some of these urls are, and how unsightly they can be and cumbersome when they fill chat logs or overfill tables. There are many very good solutions online like Bitly, but I wanted to make one for myself using some technologies I know and also potentially learn some more on the way. Through this, I used Supabase for the first time and learned about the power of the BAAS.
+Having recently graduated, I have begun to apply for many positions and track them. I've become acutely aware of how long some of the urls are for job portals/applications, and how unsightly they can be and cumbersome when they fill chat logs or overfill tables. There are many very good solutions online like Bitly, but I wanted to make one for myself using some technologies I know and also potentially learn some more on the way. Through this, I used Supabase for the first time and learned about the power of the BAAS.
 
 Not using Typescript slapped me with some errors I haven't seen in a long time.
 
