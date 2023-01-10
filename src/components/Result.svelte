@@ -9,15 +9,7 @@
 		<a href={resultant} class="underline hover:font-bold mr-4">{resultant}</a>
 		{#if resultant !== 'Are you sure this is not a snipped route already?'}
 			<button
-				on:click={() => {
-					if ('ontouchstart' in document.documentElement) {
-						resultant.setSelectionRange(0, 99999);
-						navigator.clipboard.writeText(resultant);
-					} else {
-						resultant.select();
-						navigator.clipboard.writeText(resultant);
-					}
-				}}
+				on:click={() => navigator.clipboard.writeText(resultant)}
 				class="ml-4 bg-cafe-bright dark:bg-gwen-bright px-3 leading-4 h-8 font-bold rounded-3xl"
 				>Copy</button
 			>

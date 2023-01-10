@@ -57,7 +57,7 @@
 							>
 						</td>
 						<td class="w-min truncate">
-							<a href={`${PUBLIC_SITE}/${userUrl.word}`}>{userUrl.word}</a>
+							<a href={userUrl.shortened}>{userUrl.word}</a>
 						</td>
 						<td>
 							<p>{userUrl.clicks}</p>
