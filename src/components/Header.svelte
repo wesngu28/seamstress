@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { signedStatus } from '../stores/stores';
 	import { publicSuperbase } from '../util/supabase';
+	import SignInComponent from './SignInComponent.svelte';
 
 	onMount(async () => {
 		const { data: session, error: sessionerror } = await publicSuperbase.auth.getSession();
@@ -10,10 +11,13 @@
 		}
 		window.addEventListener('resize', () => {
 			const width = document.body.clientWidth;
+			const dropdown = document.querySelector('.dropdown');
 			if (width >= 768) {
-				const dropdown = document.querySelector('.dropdown');
-				dropdown.classList.toggle('hidden');
-				dropdown.classList.toggle('block');
+				dropdown.classList.remove('hidden');
+				dropdown.classList.add('block');
+			} else {
+				dropdown.classList.add('hidden');
+				dropdown.classList.remove('block');
 			}
 		});
 	});
@@ -43,34 +47,18 @@
 			<img src="Burger-large.png" alt="burger" />
 		</button>
 	</div>
-	<div class="hidden md:hidden dropdown absolute top-20 bg-cafe-header dark:bg-gwen-header ml-0">
-		<a href="/" class="flex text-4xl font-bold">
+	<div class="hidden md:hidden dropdown absolute w-screen left-0 top-20 bg-cafe-header dark:bg-gwen-header ml-0">
+		<a href="/" class="flex text-4xl font-bold ml-4">
 			Seamstress
 			<img src="gwen.png" alt="gwen" loading="lazy" width="48" height="48" />
 		</a>
-		<a href="/about">About</a>
+		<a class="ml-4" href="/about">About</a>
+		<div class="tiny:hidden">
+			<SignInComponent />
+		</div>
 	</div>
-	<div class="flex flex-between items-center gap-4 mr-4">
-		{#if $signedStatus}
-			<a class="mx-4" href={`${signedStatus ? '/scissors' : '/'}`}>✂️ Your Links ✂️</a>
-		{/if}
-		{#if $signedStatus}
-			<button
-				class="w-max px-6 h-12 text-black text-sm leading-4 font-bold rounded-3xl bg-cafe-bright dark:bg-gwen-bright"
-				on:click={async () => publicSuperbase.auth.signOut()}>Log Out</button
-			>
-		{:else}
-			<button
-				on:click={async () =>
-					await publicSuperbase.auth.signInWithOAuth(
-						{ provider: 'github' },
-						{ redirectTo: window.location.origin }
-					)}
-				type="button"
-				class="w-max px-6 h-12 text-black text-sm leading-4 font-bold rounded-3xl bg-cafe-bright dark:bg-gwen-bright mx-4"
-				><p>Sign In</p></button
-			>
-		{/if}
+	<div class="ml-4 hidden tiny:flex flex-between items-center gap-4 mr-4">
+		<SignInComponent />
 	</div>
 </header>
 

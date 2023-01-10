@@ -17,7 +17,7 @@
 	class="mb-24 text-cafe-orange dark:text-neon-blue-300 flex flex-col lg:flex-row items-center justify-center gap-6"
 >
 	<div class="text-center m-4">
-		<h2 class="flex items-center justify-center gap-2 text-5xl font-bold">
+		<h2 class="flex items-center justify-center gap-2 text-4xl tiny:text-5xl font-bold">
 			Seamstress
 			<img src="gwen.png" alt="gwen" loading="lazy" width="64" height="64" />
 		</h2>

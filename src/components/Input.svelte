@@ -34,7 +34,7 @@
 
 <div class="flex flex-col items-center w-full">
 	<input
-		class="bg-right dark:bg-center text-white border-black shadow border w-[28rem] h-12 px-6 leading-6 rounded-[2rem] mb-4 bg-cafe-splash dark:bg-gwen-splash"
+		class="bg-right dark:bg-center text-white border-black shadow border w-[20rem] tiny:w-[24rem] sm:w-[28rem] h-12 px-6 leading-6 rounded-[2rem] mb-4 bg-cafe-splash dark:bg-gwen-splash"
 		type="string"
 		bind:value={url}
 		placeholder="Enter a link"
