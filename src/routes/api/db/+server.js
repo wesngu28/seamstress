@@ -6,9 +6,9 @@ import { supabase } from '../supabase';
 export async function POST({ request }) {
 	let insertedValue = '';
 	const body = await request.json();
-	console.log(body)
+
 	const words = await fetch(
-		'https://raw.githubusercontent.com/wesngu28/seamstress/main/files/english.txt?token=GHSAT0AAAAAAB2BCV5EIWADO6F3NN26PTQIY544Z6Q'
+		'https://raw.githubusercontent.com/wesngu28/seamstress/main/files/english.txt'
 	);
 	const englishWords = await words.text();
 	const englishWordArr = englishWords.split('\n');
