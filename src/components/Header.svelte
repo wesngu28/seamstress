@@ -1,11 +1,11 @@
 <script>
 	import { onMount } from 'svelte';
 	import { signedStatus } from '../stores/stores';
-	import { publicSuperbase, signInWithGitHub, signout } from '../util/supabase';
+	import { publicSuperbase } from '../util/supabase';
 
 	onMount(async () => {
 		const { data: session, error: sessionerror } = await publicSuperbase.auth.getSession();
-		if (session) {
+		if (session.session) {
 			signedStatus.set(true);
 		}
 		window.addEventListener('resize', () => {
@@ -13,7 +13,7 @@
 			if (width >= 768) {
 				const dropdown = document.querySelector('.dropdown');
 				dropdown.classList.toggle('hidden');
-  			dropdown.classList.toggle('block');
+				dropdown.classList.toggle('block');
 			}
 		});
 	});
@@ -21,7 +21,7 @@
 	function dropDownStuff() {
 		const dropdown = document.querySelector('.dropdown');
 		dropdown.classList.toggle('hidden');
-  	dropdown.classList.toggle('block');
+		dropdown.classList.toggle('block');
 	}
 </script>
 
@@ -57,11 +57,15 @@
 		{#if $signedStatus}
 			<button
 				class="w-max px-6 h-12 text-black text-sm leading-4 font-bold rounded-3xl bg-cafe-bright dark:bg-gwen-bright"
-				on:click={async () => await signout()}>Log Out</button
+				on:click={async () => publicSuperbase.auth.signOut()}>Log Out</button
 			>
 		{:else}
 			<button
-				on:click={async () => await signInWithGitHub()}
+				on:click={async () =>
+					await publicSuperbase.auth.signInWithOAuth(
+						{ provider: 'github' },
+						{ redirectTo: window.location.origin }
+					)}
 				type="button"
 				class="w-max px-6 h-12 text-black text-sm leading-4 font-bold rounded-3xl bg-cafe-bright dark:bg-gwen-bright mx-4"
 				><p>Sign In</p></button
