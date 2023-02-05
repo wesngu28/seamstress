@@ -1,8 +1,8 @@
 import { json } from '@sveltejs/kit';
 import { nanoid } from 'nanoid';
 import { PUBLIC_SITE } from '$env/static/public';
-import { db, linksRef } from '../../../util/firebase';
-import { addDoc, doc, setDoc } from 'firebase/firestore/lite';
+import { db } from '../../../util/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 export async function POST({ request }) {
 	let insertedValue = '';

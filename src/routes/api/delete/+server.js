@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
-import { deleteDoc, getDocs, query, where } from 'firebase/firestore/lite';
-import { linksRef } from '../../../util/firebase';
+import { deleteDoc, doc, getDocs, query, where, onSnapshot } from 'firebase/firestore';
+import { db, linksRef } from '../../../util/firebase';
 
 export async function DELETE({ request }) {
 	const body = await request.json();
@@ -9,7 +9,7 @@ export async function DELETE({ request }) {
 		const findLink = query(
 			linksRef,
 			where('word', '==', body.word),
-			where('creator', '==', body.creator)
+			where('creator', '==', body.creator),
 		);
 		const querySnapshot = await getDocs(findLink);
 		querySnapshot.forEach((link) => {

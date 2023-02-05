@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { collection, getFirestore } from 'firebase/firestore/lite';
+import { collection, getFirestore } from 'firebase/firestore';
 import { getAuth, GithubAuthProvider, onAuthStateChanged } from 'firebase/auth';
 import { signedStatus } from '../stores/stores';
 

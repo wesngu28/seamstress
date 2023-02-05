@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { doc, getDocs, query, updateDoc, where } from 'firebase/firestore/lite';
+import { doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { db, linksRef } from '../../util/firebase';
 
 export async function load({ params }) {

@@ -1,7 +1,6 @@
 <script>
-	import { auth, linksRef } from '../util/firebase';
+	import { auth } from '../util/firebase';
 	import Result from './Result.svelte';
-	import { getDocs, query, where } from 'firebase/firestore/lite';
 
 	let url;
 	let resultant = '';

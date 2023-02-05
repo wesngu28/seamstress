@@ -1,17 +1,38 @@
 <script>
 	import { onMount } from 'svelte';
-	import { auth } from '../../util/firebase';
+	import { auth, linksRef } from '../../util/firebase';
 	import { signedStatus } from '../../stores/stores';
 	import { fetchUrls } from './fetchUrls';
+	import { onSnapshot } from 'firebase/firestore';
 	let userUrls;
+	let item;
+
+	let setupSnapshotSubscription = () => {
+		onSnapshot(linksRef, (snapshot) => {
+			snapshot.docChanges().forEach((change) => {
+				if (change.type === 'removed') {
+					userUrls = userUrls.filter((doc) => doc.word !== change.doc.data().word);
+				}
+			});
+		});
+	};
+
 	onMount(async () => {
 		userUrls = await fetchUrls();
-		if (!userUrls[0]) setTimeout(async () => (userUrls = await fetchUrls()), 1000);
+		if (!userUrls[0]) {
+			setTimeout(async () => {
+				userUrls = await fetchUrls();
+				setupSnapshotSubscription();
+			}, 2500);
+		} else {
+			setupSnapshotSubscription();
+		}
+		return () => setupSnapshotSubscription();
 	});
 	async function deleter() {
 		const user = auth.currentUser;
-		const associate = document.querySelector('.deleter').getAttribute('data-url');
-		const req = await fetch('/api/delete', {
+		const associate = item.getAttribute('data-url');
+		await fetch('/api/delete', {
 			method: 'DELETE',
 			body: JSON.stringify({
 				word: associate,
@@ -21,7 +42,6 @@
 				Accept: 'application/json'
 			}
 		});
-		userUrls = await fetchUrls();
 	}
 </script>
 
@@ -61,8 +81,11 @@
 						<td>
 							<p>{userUrl.clicks}</p>
 						</td>
-						<button class="deleter absolute right-5" on:click={deleter} data-url={userUrl.word}
-							><img src="trash-small.png" alt="trash" /></button
+						<button
+							bind:this={item}
+							class="absolute right-5"
+							on:click={async (event) => await deleter(event)}
+							data-url={userUrl.word}><img src="trash-small.png" alt="trash" /></button
 						>
 					</tr>
 				{/each}
