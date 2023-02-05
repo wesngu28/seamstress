@@ -1,14 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
-	import { signedStatus } from '../stores/stores';
-	import { publicSuperbase } from '../util/supabase';
 	import SignInComponent from './SignInComponent.svelte';
 
 	onMount(async () => {
-		const { data: session, error: sessionerror } = await publicSuperbase.auth.getSession();
-		if (session.session) {
-			signedStatus.set(true);
-		}
 		window.addEventListener('resize', () => {
 			const width = document.body.clientWidth;
 			const dropdown = document.querySelector('.dropdown');
@@ -61,11 +55,3 @@
 		<SignInComponent />
 	</div>
 </header>
-
-<style>
-	@media (min-width: 768px) {
-		.dropdown {
-			display: none;
-		}
-	}
-</style>

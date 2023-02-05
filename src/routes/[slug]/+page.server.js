@@ -1,18 +1,13 @@
 import { redirect } from '@sveltejs/kit';
-import { supabase } from '../api/supabase';
+import { doc, getDocs, query, updateDoc, where } from 'firebase/firestore/lite';
+import { db, linksRef } from '../../util/firebase';
 
 export async function load({ params }) {
-	let { data: isSnipped, error: iserror } = await supabase
-		.from('Links')
-		.select()
-		.eq('word', params.slug);
-	await supabase
-		.from('Links')
-		.update({ clicks: isSnipped[0].clicks + 1 })
-		.eq('word', isSnipped[0].word);
-	if (isSnipped) {
-		if (isSnipped.length > 0) {
-			throw redirect(302, isSnipped[0].original);
-		}
-	}
+	const findLink = query(linksRef, where("word", "==", params.slug));
+	const querySnapshot = await getDocs(findLink)
+	querySnapshot.forEach((document) => {
+		const targetDoc = doc(db, "links", document.id)
+		updateDoc(targetDoc, { clicks: document.data().clicks + 1 })
+		throw redirect(302, document.data().original);
+	});
 }

@@ -1,7 +1,8 @@
 import { json } from '@sveltejs/kit';
 import { nanoid } from 'nanoid';
 import { PUBLIC_SITE } from '$env/static/public';
-import { supabase } from '../supabase';
+import { linksRef } from '../../../util/firebase';
+import { addDoc } from 'firebase/firestore/lite';
 
 export async function POST({ request }) {
 	let insertedValue = '';
@@ -13,24 +14,25 @@ export async function POST({ request }) {
 	const englishWords = await words.text();
 	const englishWordArr = englishWords.split('\n');
 	insertedValue = englishWordArr[Math.floor(Math.random() * englishWordArr.length)];
-	const { data, error } = await supabase.from('Links').insert([
-		{
-			original: body.original,
+	try {
+		await addDoc(linksRef, {
+    	original: body.original,
+			shortened: `${PUBLIC_SITE}${insertedValue}_gwen`,
+			created_at: new Date(Date.now()).toLocaleString(),
+			word: `${insertedValue}_gwen`,
+			creator: body.creator && body.creator,
+			clicks: 0
+  	});
+	} catch (err) {
+		insertedValue = nanoid();
+		await addDoc(linksRef, {
+    	original: body.original,
 			shortened: `${PUBLIC_SITE}${insertedValue}_gwen`,
 			word: `${insertedValue}_gwen`,
-			creator: body.creator && body.creator
-		}
-	]);
-	if (error) {
-		insertedValue = nanoid();
-		const { data, error } = await supabase.from('Links').insert([
-			{
-				original: body.original,
-				shortened: `${PUBLIC_SITE}${insertedValue}_gwen`,
-				word: `${insertedValue}_gwen`,
-				creator: body.creator && body.creator
-			}
-		]);
+			created_at: new Date(Date.now()).toLocaleString(),
+			creator: body.creator && body.creator,
+			clicks: 0
+  	});
 	}
 	return json({ path: `${PUBLIC_SITE}${insertedValue}_gwen` });
 }

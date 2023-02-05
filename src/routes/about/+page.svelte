@@ -30,8 +30,7 @@
 			<p class="my-4 max-w-xs sm:max-w-lg text-cafe-orange dark:text-neon-blue-300">
 				I could have used an online solution or an API to shorten my urls, but where is the fun in
 				that? Needing anything now online could be a new learning experience for me, and through
-				making this, I used a backend as a service for the first time (Supabase), and I can
-				definitely see the appeal.
+				making this, I used Firebase for the first time.
 			</p>
 		</div>
 	</div>

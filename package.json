@@ -10,7 +10,7 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"dependencies": {
-		"@supabase/supabase-js": "^2.2.3",
+		"firebase": "^9.17.1",
 		"nanoid": "^4.0.0"
 	},
 	"devDependencies": {

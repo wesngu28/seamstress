@@ -1,21 +1,21 @@
 <script>
 	import { onMount } from 'svelte';
-	import { PUBLIC_SITE } from '$env/static/public';
-	let userUrls;
-	import { publicSuperbase } from '../../util/supabase';
+	import { auth } from '../../util/firebase'
 	import { signedStatus } from '../../stores/stores';
 	import { fetchUrls } from './fetchUrls';
+	let userUrls;
 	onMount(async () => {
-		userUrls = await fetchUrls();
+		userUrls = await fetchUrls()
+		if (!userUrls[0]) setTimeout(async () => userUrls = await fetchUrls(), 1000)
 	});
 	async function deleter() {
-		const { data: session } = await publicSuperbase.auth.getSession();
+		const user = auth.currentUser;
 		const associate = document.querySelector('.deleter').getAttribute('data-url');
 		const req = await fetch('/api/delete', {
 			method: 'DELETE',
 			body: JSON.stringify({
 				word: associate,
-				creator: session.session && session.session.user.id
+				creator: user && user.uid
 			}),
 			headers: {
 				Accept: 'application/json'
@@ -48,7 +48,7 @@
 				{#each userUrls as userUrl}
 					<tr class="truncate relative">
 						<td class="hidden tiny:table-cell">
-							<p>{userUrl.created_at.substring(0, 10)}</p>
+							<p>{userUrl.created_at.substring(0, userUrl.created_at.indexOf(","))}</p>
 
 						</td>
 						<td class="w-min truncate">

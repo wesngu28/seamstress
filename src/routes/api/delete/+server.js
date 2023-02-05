@@ -1,19 +1,22 @@
 import { json } from '@sveltejs/kit';
-import { supabase } from '../supabase';
+import { deleteDoc, getDocs, query, where } from 'firebase/firestore/lite';
+import { linksRef } from '../../../util/firebase';
 
 export async function DELETE({ request }) {
 	const body = await request.json();
-	let result = 'Failed to remove, you do not have permission.'
+	let result = 'Failed to remove, you do not have permission.';
 	if (body.creator !== null) {
-		const { data, error } = await supabase
-			.from('Links')
-			.delete()
-			.eq('word', body.word)
-			.eq('creator', body.creator)
-			.select()
-		if (data[0]) {
-			result = `${body.word} removed from your links.`
-		}
+		const findLink = query(
+			linksRef,
+			where('word', '==', body.word),
+			where('creator', '==', body.creator)
+		);
+		const querySnapshot = await getDocs(findLink);
+		querySnapshot.forEach((link) => {
+			const targetDoc = doc(db, 'links', link.id);
+			deleteDoc(targetDoc);
+			result = `${body.word} removed from your links.`;
+		});
 	}
 	return json({ status: result });
 }

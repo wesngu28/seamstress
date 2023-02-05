@@ -1,12 +1,14 @@
-import { publicSuperbase } from "../../util/supabase"
+import { getDocs, query, where } from "firebase/firestore/lite";
+import { linksRef } from "../../util/firebase";
 
 export async function fetchUrls() {
-	const { data: session, error: sessionerror } = await publicSuperbase.auth.getSession();
-	if (session.session) {
-		let { data: userLinks, error: saError } = await publicSuperbase
-			.from('Links')
-			.select()
-			.eq('creator', session.session.user.id);
-		return userLinks.map((link) => link);
-	}
+		const findLink = query(linksRef, where('creator', '==', usa));
+		const querySnapshot = await getDocs(findLink);
+		const userLinks = []
+		querySnapshot.forEach((link) => {
+			console.log(link.data())
+			userLinks.push(link.data())
+		});
+		return userLinks;
+
 }
