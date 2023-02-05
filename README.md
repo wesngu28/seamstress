@@ -5,7 +5,6 @@
   </div>
 <br />
 
-
 <a href="https://gwen.vercel.app/">Snip Snip</a>
 
   <div>

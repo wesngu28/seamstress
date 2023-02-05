@@ -41,7 +41,9 @@
 			<img src="Burger-large.png" alt="burger" />
 		</button>
 	</div>
-	<div class="hidden md:hidden dropdown absolute w-screen left-0 top-20 bg-cafe-header dark:bg-gwen-header ml-0">
+	<div
+		class="hidden md:hidden dropdown absolute w-screen left-0 top-20 bg-cafe-header dark:bg-gwen-header ml-0"
+	>
 		<a href="/" class="flex text-4xl font-bold ml-4">
 			Seamstress
 			<img src="gwen.png" alt="gwen" loading="lazy" width="48" height="48" />

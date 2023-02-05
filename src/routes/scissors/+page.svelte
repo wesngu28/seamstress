@@ -1,12 +1,12 @@
 <script>
 	import { onMount } from 'svelte';
-	import { auth } from '../../util/firebase'
+	import { auth } from '../../util/firebase';
 	import { signedStatus } from '../../stores/stores';
 	import { fetchUrls } from './fetchUrls';
 	let userUrls;
 	onMount(async () => {
-		userUrls = await fetchUrls()
-		if (!userUrls[0]) setTimeout(async () => userUrls = await fetchUrls(), 1000)
+		userUrls = await fetchUrls();
+		if (!userUrls[0]) setTimeout(async () => (userUrls = await fetchUrls()), 1000);
 	});
 	async function deleter() {
 		const user = auth.currentUser;
@@ -41,15 +41,14 @@
 					<th>Original</th>
 					<th>Snipped</th>
 					<th>Clicks</th>
-					<th class="w-2"></th>
+					<th class="w-2" />
 				</tr>
 			</thead>
 			<tbody class="truncate gap-4">
 				{#each userUrls as userUrl}
 					<tr class="truncate relative">
 						<td class="hidden tiny:table-cell">
-							<p>{userUrl.created_at.substring(0, userUrl.created_at.indexOf(","))}</p>
-
+							<p>{userUrl.created_at.substring(0, userUrl.created_at.indexOf(','))}</p>
 						</td>
 						<td class="w-min truncate">
 							<a href={userUrl.original}
@@ -63,7 +62,8 @@
 							<p>{userUrl.clicks}</p>
 						</td>
 						<button class="deleter absolute right-5" on:click={deleter} data-url={userUrl.word}
-						><img src="trash-small.png" alt="trash"/></button>
+							><img src="trash-small.png" alt="trash" /></button
+						>
 					</tr>
 				{/each}
 			</tbody>

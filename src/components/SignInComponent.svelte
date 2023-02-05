@@ -1,7 +1,7 @@
 <script>
 	import { signedStatus } from '../stores/stores';
 	import { signInWithPopup, signOut } from 'firebase/auth';
-	import { auth, provider } from '../util/firebase'
+	import { auth, provider } from '../util/firebase';
 </script>
 
 {#if $signedStatus}

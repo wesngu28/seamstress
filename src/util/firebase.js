@@ -1,5 +1,4 @@
 import { initializeApp } from 'firebase/app';
-import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check'
 import { collection, getFirestore } from 'firebase/firestore/lite';
 import { getAuth, GithubAuthProvider, onAuthStateChanged } from 'firebase/auth';
 import { signedStatus } from '../stores/stores';
@@ -19,17 +18,10 @@ export const linksRef = collection(db, 'links');
 export const provider = new GithubAuthProvider();
 export const auth = getAuth();
 
-if (typeof window !== "undefined") {
-  const appCheck = initializeAppCheck(firebase, {
-    provider: new ReCaptchaV3Provider('6LcT0lMkAAAAACyGhnZg1kmITe2XYR5OSnGKZEFD'),
-    isTokenAutoRefreshEnabled: true
-  });
-}
-
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    signedStatus.set(true);
-  } else {
-    signedStatus.set(false);
-  }
-})
+	if (user) {
+		signedStatus.set(true);
+	} else {
+		signedStatus.set(false);
+	}
+});

@@ -1,5 +1,5 @@
 <script>
-	import { auth, linksRef } from '../util/firebase'
+	import { auth, linksRef } from '../util/firebase';
 	import Result from './Result.svelte';
 	import { getDocs, query, where } from 'firebase/firestore/lite';
 
@@ -9,29 +9,19 @@
 		const re =
 			/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i;
 		if (re.test(url)) {
-			const currUrls = []
-			const findLink = query(linksRef, where("original", "==", url));
-			const querySnapshot = await getDocs(findLink)
-			querySnapshot.forEach(link => {
-        	currUrls.push(link.data().original)
-      })
-			if (currUrls && currUrls.includes(url)) {
-				resultant = 'Are you sure this is not a snipped route already?'
-			} else {
-				const user = auth.currentUser;
-				const req = await fetch('/api/db', {
-						method: 'POST',
-						body: JSON.stringify({
-							original: url,
-							creator: user && user.uid
-						}),
-						headers: {
-							Accept: 'application/json'
-						}
-					});
-				const json = await req.json();
-				resultant = json.path;
-			}
+			const user = auth.currentUser;
+			const req = await fetch('/api/db', {
+				method: 'POST',
+				body: JSON.stringify({
+					original: url,
+					creator: user && user.uid
+				}),
+				headers: {
+					Accept: 'application/json'
+				}
+			});
+			const json = await req.json();
+			resultant = json.path;
 		}
 	}
 </script>
